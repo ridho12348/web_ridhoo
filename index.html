@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Login</title>
+<link rel="stylesheet" href="CSS.style.css">
+</head>
+<body>
+
+<!-- Background video -->
+<video autoplay loop muted playsinline id="bg">
+    <source src="video1.mp4" type="video/mp4">
+</video>
+
+<div class="login-box">
+    <h2> login</h2>
+
+    <form onsubmit="return login()">
+        <div class="input-group">
+            <input type="text" id="user" required>
+            <label>Username</label>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="pass" required>
+            <label>Password</label>
+        </div>
+
+        <button type="submit">Masuk</button>
+    </form>
+
+    <p id="notif"></p>
+</div>
+
+<script>
+function login(){
+    let u=document.getElementById("user").value;
+    let p=document.getElementById("pass").value;
+    let notif=document.getElementById("notif");
+
+    if(u=="admin" && p=="12345"){
+        notif.style.color="lime";
+        notif.innerText="Login berhasil, masuk...";
+        setTimeout(()=>{ window.location="dashboard.html"; },1200);
+        return false;
+    }else{
+        notif.style.color="red";
+        notif.innerText="⚠ Username atau password salah!";
+        return false;
+    }
+}
+</script>
+
+</body>
+</html>
+

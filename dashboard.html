@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Video + Glass</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{color:#fff;overflow:hidden;}
+
+video.bg{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    object-fit:cover;filter:brightness(.55);z-index:-1;
+}
+
+nav{
+    display:flex;justify-content:center;gap:25px;padding:15px;margin-top:10px;
+    background:rgba(255,255,255,.12);backdrop-filter:blur(15px);
+    border-radius:0 0 20px 20px;
+}
+nav a{
+    color:#fff;text-decoration:none;font-weight:600;
+    padding:8px 15px;border-radius:12px;transition:.3s;cursor:pointer;
+}
+nav a:hover, nav a.active{background:rgba(255,255,255,.28);}
+
+.page{
+    position:absolute;width:80%;max-width:850px;top:100px;left:50%;
+    transform:translateX(-50%);padding:25px;border-radius:25px;
+    background:rgba(255,255,255,.13);backdrop-filter:blur(17px);
+    box-shadow:0 0 25px rgba(255,255,255,.25);display:none;
+    animation:fade .6s ease;
+}
+@keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;}}
+
+h2{text-align:center;font-size:35px;margin-bottom:15px;text-shadow:0 0 12px #fff;}
+
+.data{font-size:22px;text-align:center;line-height:2.1;font-weight:500;}
+.data b{font-size:27px;}
+
+/* SOSMED */
+.sosmed a{
+    display:block;margin:10px 0;padding:14px;border-radius:15px;text-align:center;
+    background:rgba(255,255,255,.22);font-size:20px;color:white;text-decoration:none;
+    font-weight:600;transition:.3s;
+}
+.sosmed a:hover{background:rgba(255,255,255,.35);transform:scale(1.05);}
+</style>
+</head>
+
+<body>
+
+<!-- Background Video -->
+<video class="bg" autoplay muted loop>
+<source src="video2.mp4" type="video/mp4">
+</video>
+
+<!-- ================= MENU ================= -->
+<nav>
+    <a class="active" onclick="showPage('home')">Home</a>
+    <a onclick="showPage('data')">Data Diri</a>
+    <a onclick="showPage('sosmed')">Sosial Media</a>
+    <a onclick="showPage('wa')">WhatsApp</a>
+    <a onclick="showPage('videoPage')">Video</a>
+    <a onclick="logout()" style="background:#cf3d3d;font-weight:bold;">Logout</a>
+</nav>
+
+<!-- ================= HALAMAN ================= -->
+
+<div id="home" class="page" style="display:block;">
+    <h2>Selamat Datang 👋</h2>
+    <center><p>Pilih menu diatas untuk membuka halaman lain.</p></center>
+</div>
+
+<div id="data" class="page">
+    <h2>Data Diri 📄</h2>
+    <div class="data">
+        Nama : <b>Ridho Firmansyah</b><br>
+        Kelas : <b>XI TJKT 1</b><br>
+        Hobi : <b>Musik & Coding</b><br>
+        Motto: <b>Belajar sekarang, sukses kemudian.</b>
+    </div>
+</div>
+
+<div id="sosmed" class="page">
+    <h2>Sosial Media 🌐</h2>
+    <div class="sosmed">
+        <a href="https://www.instagram.com/firmansyah012abc?igsh=MXE1d3k5Y2Fxd2V3" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@ridhofirmansyah071" target="_blank">TikTok</a>
+        <a href="https://www.youtube.com/@ridhofirmansyah1209" target="_blank">YouTube</a>
+    </div>
+</div>
+
+<div id="wa" class="page">
+    <h2>WhatsApp 📩</h2>
+    <center><a href="https://wa.me/6285745604609" target="_blank" style="
+        padding:15px 22px;background:rgba(255,255,255,.25);
+        font-size:22px;border-radius:20px;color:#fff;font-weight:600;text-decoration:none;">
+        ➤ Chat WhatsApp
+    </a></center>
+</div>
+
+<!-- 🔥 HALAMAN VIDEO NGILANG -->
+<div id="videoPage" class="page">
+    <h2>Video Fade Out 🎥</h2>
+
+    <video id="vidAutoHide" autoplay muted style="
+        width:100%;border-radius:18px;margin-top:10px;
+        transition:opacity 2.5s ease;">
+        <source src="video1.mp4" type="video/mp4">
+    </video>
+
+    <center>
+        <p id="notif" style="margin-top:12px;font-size:18px;opacity:0;transition:1s;">
+            Video akan menghilang otomatis...
+        </p>
+    </center>
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function showPage(page){
+    document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+    document.getElementById(page).style.display="block";
+    document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
+    event.target.classList.add("active");
+}
+
+/* LOGOUT + kembali ke halaman login */
+function logout(){
+    if(confirm("Yakin ingin logout?")){
+        window.location.href = "index.html"; // arahkan ke halaman login
+
+
+    }
+}
+
+/* ================= VIDEO NGILANG ================= */
+let vid = document.getElementById("vidAutoHide");
+let notif = document.getElementById("notif");
+
+vid.onplay = ()=>{
+    notif.style.opacity="1";
+    setTimeout(()=> vid.style.opacity="0", 5000);   // 5 detik → mulai fade out
+    setTimeout(()=> notif.style.opacity="0", 5500); // notif ikut hilang
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
